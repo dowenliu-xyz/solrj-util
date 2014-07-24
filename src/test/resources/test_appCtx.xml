@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="masterServerConf" class="me.dowen.solrj.server.SolrServerConfiguration">
+		<property name="retry" value="true"/>
+		<property name="serverUrls">
+			<set>
+				<value>http://127.0.0.1:5080/solr/product</value>
+			</set>
+		</property>
+		<property name="type" value="UPDATE"/>
+	</bean>
+
+	<bean id="masterFactory" class="me.dowen.solrj.server.SolrServerFactory">
+		<property name="conf" ref="masterServerConf"/>
+	</bean>
+
+	<bean id="slavesServerConf" class="me.dowen.solrj.server.SolrServerConfiguration">
+		<property name="retry" value="true"/>
+		<property name="serverUrls">
+			<set>
+				<value>http://127.0.0.1:6080/solr/brand</value>
+				<value>http://127.0.0.1:7080/solr/brand</value>
+			</set>
+		</property>
+		<property name="type" value="QUERY"/>
+	</bean>
+
+	<bean id="slavesFactory" class="me.dowen.solrj.server.SolrServerFactory">
+		<property name="conf" ref="slavesServerConf"/>
+	</bean>
+
+</beans>
