@@ -81,7 +81,7 @@ public class SimpleHighLightFilter implements QueryFilter {
 	public SolrQuery filter(SolrQuery query) {
 		query.setHighlight(true);
 		query.setHighlightSimplePost(this.post);
-		query.setHighlightSimplePre(this.post);
+		query.setHighlightSimplePre(this.pre);
 		for (String field : this.fields) {
 			query.addHighlightField(field);
 		}
